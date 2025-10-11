@@ -1,0 +1,247 @@
+.calendar-schedule {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.date-badge {
+  min-width: 60px;
+  padding: 8px 12px;
+}
+
+.month-abbr {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.current-day {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.date-navigation {
+  font-size: 14px;
+}
+
+.calendar-grid {
+  border: 1px solid #dee2e6;
+}
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-bottom: 1px solid #dee2e6;
+}
+
+.day-header {
+  padding: 12px;
+  font-size: 13px;
+  color: #6c757d;
+  border-right: 1px solid #dee2e6;
+}
+
+.day-header:last-child {
+  border-right: none;
+}
+
+.calendar-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-day {
+  min-height: 120px;
+  padding: 8px;
+  border-right: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+  background-color: white;
+}
+
+.calendar-day:nth-child(7n) {
+  border-right: none;
+}
+
+.calendar-day.prev-month,
+.calendar-day.next-month {
+  background-color: #f8f9fa;
+}
+
+.calendar-day.prev-month .day-number,
+.calendar-day.next-month .day-number {
+  color: #ced4da;
+}
+
+.day-number {
+  font-size: 14px;
+  font-weight: 500;
+  color: #495057;
+  margin-bottom: 6px;
+}
+
+.events-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.event-card {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.event-card:hover {
+  opacity: 0.8;
+}
+
+.event-title {
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  margin-right: 6px;
+}
+
+.event-time {
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.more-events {
+  font-size: 11px;
+  color: #6c757d;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.more-events:hover {
+  color: #495057;
+}
+
+/* Event type colors */
+.event-body-contouring {
+  background-color: #fecdd3;
+  color: #9f1239;
+}
+
+.event-microblading {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.event-staff-meeting {
+  background-color: #fecdd3;
+  color: #9f1239;
+}
+
+.event-facial {
+  background-color: #fecdd3;
+  color: #9f1239;
+}
+
+.event-massage {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.event-training {
+  background-color: #e9d5ff;
+  color: #6b21a8;
+}
+
+.event-teeth-whitening {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.event-laser {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.event-microdermabrasion {
+  background-color: #e9d5ff;
+  color: #6b21a8;
+}
+
+.event-botox {
+  background-color: #fecdd3;
+  color: #9f1239;
+}
+
+.event-dermal-fillers {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.event-waxing {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.event-hair-coloring {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.event-body-wrap {
+  background-color: #fecdd3;
+  color: #9f1239;
+}
+
+.event-manicure {
+  background-color: #fecdd3;
+  color: #9f1239;
+}
+
+.event-nail-art {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.event-pedicure {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.event-couples-massage {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.event-skin-consultation {
+  background-color: #fecdd3;
+  color: #9f1239;
+}
+
+.event-makeup {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.event-default {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+@media (max-width: 768px) {
+  .calendar-day {
+    min-height: 100px;
+  }
+
+  .event-card {
+    font-size: 10px;
+  }
+
+  .event-time {
+    display: none;
+  }
+}

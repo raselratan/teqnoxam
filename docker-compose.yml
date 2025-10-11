@@ -1,0 +1,62 @@
+services:
+  exam_app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: exam_app
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - exam_db
+    networks:
+      - laravel
+
+  exam_db:
+    image: mysql:8.0
+    container_name: exam_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: exam_app
+      MYSQL_ROOT_PASSWORD: secret
+    volumes:
+      - mysqldata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - laravel
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: exam_db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: secret
+    ports:
+      - "8080:80"
+    depends_on:
+      - exam_db
+    networks:
+      - laravel
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_server
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - exam_app
+    networks:
+      - laravel
+
+volumes:
+  mysqldata:
+
+networks:
+  laravel:
+    driver: bridge
