@@ -2,8 +2,6 @@
 
 namespace Common\Src\Providers;
 
-use Common\Database\Seeders\UserSeeder;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\ServiceProvider;
 
 class CommonServiceProvider extends ServiceProvider
@@ -26,5 +24,10 @@ class CommonServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../../Config/common.php', 'config');
     }
 
-    protected function registerRepositories(): void {}
+    protected function registerRepositories(): void {
+        $this->app->bind(
+            \Common\Src\Repositories\Contracts\UserRepositoryInterface::class,
+            \Common\Src\Repositories\UserRepository::class
+        );  
+    }
 }

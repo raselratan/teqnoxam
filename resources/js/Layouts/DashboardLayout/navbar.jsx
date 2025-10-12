@@ -33,12 +33,12 @@ export default function Navbar({ onMenuClick, onSettingsClick, theme, onThemeTog
           </div>
         </div>
 
-        <div className="hidden md:flex flex-1 max-w-md mx-8">
+        {/* <div className="hidden md:flex flex-1 max-w-md mx-8">
           <div className="relative w-full">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input placeholder="Search..." className="pl-9 cursor-pointer" />
           </div>
-        </div>
+        </div> */}
 
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="icon" onClick={onThemeToggle} className="cursor-pointer">

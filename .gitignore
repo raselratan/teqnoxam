@@ -1,0 +1,86 @@
+# ============================================
+# Laravel + Inertia React .gitignore
+# ============================================
+
+# Laravel vendor & environment
+/vendor/
+.env
+.env.backup
+.env.*.backup
+.env.local
+.env.development
+.env.testing
+.env.production
+
+# Laravel caches & logs
+/storage/*.key
+/storage/app/public/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/framework/views/*
+/bootstrap/cache/*
+/public/storage
+
+# Keep specific storage folders
+!storage/app/public/.gitignore
+!storage/framework/.gitignore
+!storage/logs/.gitignore
+
+# Logs
+*.log
+*.log.*
+
+# Composer dependencies
+/composer.lock
+/vendor/
+
+# Node & React build
+/node_modules/
+/public/build/
+/public/hot
+/public/mix-manifest.json
+/public/js/
+/public/css/
+
+# Vite cache and output
+/.vite/
+/vite.config.*.temp
+/.vite/deps
+
+# IDE and system files
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+
+# OS junk files
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# npm / yarn / pnpm lockfiles (optional)
+# uncomment the one you want to keep tracked if needed
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Testing
+.phpunit.result.cache
+coverage/
+.php_cs.cache
+.php-cs-fixer.cache
+
+# Laravel Sail & Docker
+docker-compose.override.yml
+.docker/
+sail
+*.pid
+
+# Custom local files
+/public/uploads/
