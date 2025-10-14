@@ -2,8 +2,8 @@ import React from "react"
 
 import DataTable from "@/components/DataTable/DataTable"
 
-export default function Dashboard() {
-const columns = [
+export default function Users() {
+  const columns = [
     {
       header: "ID",
       accessorKey: "id",
@@ -35,7 +35,7 @@ const columns = [
 
   return (
     <div>
-        <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={data} />
     </div>
   )
 }

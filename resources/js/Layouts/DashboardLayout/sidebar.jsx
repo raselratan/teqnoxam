@@ -14,18 +14,20 @@ import {
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { cn } from "@/lib/utils"
+import { route } from "ziggy-js"
+import { Link } from "@inertiajs/react"
 
 const menuItems = [
-  { icon: Home, label: "Dashboard", href: "/" },
+  { icon: Home, label: "Dashboard", href: `${route('admin.dashboard')}` },
   { icon: BarChart3, label: "Analytics", href: "/analytics" },
   {
     icon: Users,
     label: "Users",
     href: "/users",
     children: [
-      { label: "All Users", href: "/users" },
-      { label: "Add User", href: "/users/add" },
-      { label: "User Roles", href: "/users/roles" },
+      { label: "All Users", href: `${route('admin.users')}` },
+      { label: "Add User", href: `${route('admin.users')}` },
+      { label: "User Roles", href: `${route('admin.users')}` },
     ],
   },
   {
@@ -87,7 +89,12 @@ export default function Sidebar({ isOpen, isCollapsed, onCollapse }) {
                       <item.icon className={cn("h-5 w-5", !isCollapsed && "mr-3")} />
                       {!isCollapsed && (
                         <>
-                          <span className="flex-1 text-left">{item.label}</span>
+                          <span className="flex-1 text-left">
+                            {
+                              item.children ? item.label : <Link href={item.href}>{item.label}</Link>
+                            }
+                            {/* <Link href={item.href}>{item.label}</Link>{item.label} */}
+                          </span>
                           {item.children &&
                             (expandedItems.includes(item.label) ? (
                               <ChevronDown className="h-4 w-4" />
@@ -105,7 +112,7 @@ export default function Sidebar({ isOpen, isCollapsed, onCollapse }) {
                             variant="ghost"
                             className="w-full justify-start text-sm cursor-pointer"
                           >
-                            {child.label}
+                            <Link href={child.href}>{child.label}</Link>
                           </Button>
                         ))}
                       </div>

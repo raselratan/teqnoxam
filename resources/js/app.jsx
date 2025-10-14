@@ -1,7 +1,7 @@
 import './bootstrap';
 import { createInertiaApp } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'
-import LandingLayout from '@/Layouts/DashboardLayout/dashboard-layout.jsx';
+import DashboardLayout from '@/Layouts/DashboardLayout/dashboard-layout.jsx';
 
 createInertiaApp({
     resolve: name => {
@@ -11,7 +11,7 @@ createInertiaApp({
         // return page;
 
         if (!('layout' in page.default)) {
-            page.default.layout = (page) => <LandingLayout>{page}</LandingLayout>;
+            page.default.layout = (page) => <DashboardLayout>{page}</DashboardLayout>;
         }
 
         return page;

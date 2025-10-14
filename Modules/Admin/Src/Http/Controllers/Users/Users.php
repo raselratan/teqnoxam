@@ -10,5 +10,5 @@ class Users extends BaseAction
     public function __invoke(): Response
     {
         return inertia('Admin/Users');
-    }   
+    }
 }

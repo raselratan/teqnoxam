@@ -14,4 +14,3 @@ Route::group(['namespace' => $namespace,  'prefix' => 'admin'], function () {
         });
     });
 });
-    
