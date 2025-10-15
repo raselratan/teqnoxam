@@ -2,51 +2,20 @@ import { useState } from "react"
 import {
   ChevronDown,
   ChevronRight,
-  Home,
-  BarChart3,
-  Users,
-  Settings,
-  FileText,
-  Package,
   ChevronLeft,
   ChevronRightIcon,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { cn } from "@/lib/utils"
-import { route } from "ziggy-js"
 import { Link } from "@inertiajs/react"
-
-const menuItems = [
-  { icon: Home, label: "Dashboard", href: `${route('admin.dashboard')}` },
-  { icon: BarChart3, label: "Analytics", href: "/analytics" },
-  {
-    icon: Users,
-    label: "Users",
-    href: "/users",
-    children: [
-      { label: "All Users", href: `${route('admin.users')}` },
-      { label: "Add User", href: `${route('admin.users')}` },
-      { label: "User Roles", href: `${route('admin.users')}` },
-    ],
-  },
-  {
-    icon: Package,
-    label: "Products",
-    href: "/products",
-    children: [
-      { label: "All Products", href: "/products" },
-      { label: "Add Product", href: "/products/add" },
-      { label: "Categories", href: "/products/categories" },
-    ],
-  },
-  { icon: FileText, label: "Reports", href: "/reports" },
-  { icon: Settings, label: "Settings", href: "/settings" },
-]
+import { usePage } from '@inertiajs/react'
+import { adminMenuItems, userMenuItems } from "./menu-items"
 
 export default function Sidebar({ isOpen, isCollapsed, onCollapse }) {
   const [expandedItems, setExpandedItems] = useState([])
-
+  const { props } = usePage()
+  const menuItems = props.role == 'admin' ? adminMenuItems : userMenuItems;
   const toggleExpand = (label) => {
     setExpandedItems((prev) => (prev.includes(label) ? prev.filter((item) => item !== label) : [...prev, label]))
   }
@@ -112,6 +81,7 @@ export default function Sidebar({ isOpen, isCollapsed, onCollapse }) {
                             variant="ghost"
                             className="w-full justify-start text-sm cursor-pointer"
                           >
+                            <child.icon className={cn("h-5 w-5", !isCollapsed && "mr-3")} />
                             <Link href={child.href}>{child.label}</Link>
                           </Button>
                         ))}

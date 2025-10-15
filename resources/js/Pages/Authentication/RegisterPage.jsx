@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { ArrowLeft, Mail, Lock, User, Eye, EyeOff } from "lucide-react"
+import { ArrowLeft, Phone, Lock, User, Eye, EyeOff } from "lucide-react"
 import { Link } from "@inertiajs/react"
 import { route } from 'ziggy-js';
 
@@ -71,19 +71,19 @@ function RegisterPage() {
                             </div>
                         </div>
 
-                        {/* Email */}
+                        {/* Phone */}
                         <div className="space-y-2">
-                            <Label htmlFor="email" className="text-gray-700 font-medium">
-                                Email Address
+                            <Label htmlFor="phone" className="text-gray-700 font-medium">
+                                Phone
                             </Label>
                             <div className="relative">
-                                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                                 <Input
-                                    id="email"
-                                    type="email"
-                                    placeholder="you@example.com"
+                                    id="phone"
+                                    type="text"
+                                    placeholder="880XXXXXXXXX"
                                     value={formData.email}
-                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                                     className="pl-10 h-12 border border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200"
                                     required
                                 />

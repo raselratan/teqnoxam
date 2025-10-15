@@ -3,6 +3,7 @@
 namespace Common\Src\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Inertia\Inertia;
 
 class CommonServiceProvider extends ServiceProvider
 {
@@ -22,12 +23,16 @@ class CommonServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../../Database/Migrations');
         $this->app->register(RouteServiceProvider::class);
         $this->mergeConfigFrom(__DIR__ . '/../../Config/common.php', 'config');
+        Inertia::share([
+            "role" => fn() => auth()?->user()->role ?? null,
+        ]);
     }
 
-    protected function registerRepositories(): void {
+    protected function registerRepositories(): void
+    {
         $this->app->bind(
             \Common\Src\Repositories\Contracts\UserRepositoryInterface::class,
             \Common\Src\Repositories\UserRepository::class
-        );  
+        );
     }
 }

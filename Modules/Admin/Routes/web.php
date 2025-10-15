@@ -11,6 +11,7 @@ Route::group(['namespace' => $namespace,  'prefix' => 'admin'], function () {
         Route::get('/', 'Dashboard')->name('admin.dashboard');
         Route::group(['namespace' => 'Users',  'prefix' => 'users'], function () {
             Route::get('/', 'Users')->name('admin.users');
+            Route::get('/create', 'CreatePage')->name('admin.users.create');
         });
     });
 });
