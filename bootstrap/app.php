@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+
 
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -16,7 +18,16 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             HandleInertiaRequests::class,
         ]);
+        $middleware->alias([
+            'auth' => Authenticate::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->renderable(function (Illuminate\Auth\AuthenticationException $e, $request) {
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Unauthenticated.'], 401);
+            }
+
+            return redirect()->guest(route('auth.login'));
+        });
     })->create();

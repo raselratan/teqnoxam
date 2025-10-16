@@ -121,7 +121,7 @@ function LoginPage() {
                         <Button
                             type="submit"
                             disabled={processing}
-                            className="w-full h-12 bg-gradient-to-r from-purple-500 via-indigo-500 to-pink-500 text-white font-semibold hover:scale-105 transition-transform duration-300"
+                            className="w-full h-12 cursor-pointer bg-gradient-to-r from-purple-500 via-indigo-500 to-pink-500 text-white font-semibold hover:scale-105 transition-transform duration-300"
                         >
                             {processing ? "Logging in..." : "Login"}
                         </Button>
@@ -129,7 +129,7 @@ function LoginPage() {
                         {/* Register */}
                         <p className="text-center text-gray-600 text-sm">
                             Don't have an account?{" "}
-                            <Link href={route('auth.register')} className="text-purple-500 hover:underline font-medium">
+                            <Link href={route('auth.register')} className="text-purple-500 hover:underline font-medium cursor-pointer">
                                 Register here
                             </Link>
                         </p>

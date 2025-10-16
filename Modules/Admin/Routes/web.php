@@ -12,6 +12,7 @@ Route::group(['namespace' => $namespace,  'prefix' => 'admin'], function () {
         Route::group(['namespace' => 'Users',  'prefix' => 'users'], function () {
             Route::get('/', 'Users')->name('admin.users');
             Route::get('/create', 'CreatePage')->name('admin.users.create');
+            Route::post('/create', 'Create')->name('admin.users.store');
         });
     });
 });

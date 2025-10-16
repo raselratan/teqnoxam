@@ -28,8 +28,27 @@ class UserRepository implements UserRepositoryInterface
         return User::find($id);
     }
 
-    public function all(): array
+    public function all()
     {
-        return User::all()->toArray();
+        return User::all();
+    }
+
+    public function getPaginatedUsers($search, $sortBy, $sortDirection, $perPage, $page)
+    {
+        $query = User::query();
+
+        // Apply search filter
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('mobile', 'like', "%{$search}%")
+                    ->orWhere('role', 'like', "%{$search}%");
+            });
+        }
+
+        // Apply sorting
+        $query->orderBy($sortBy, $sortDirection);
+
+        return $query->whereNot('id', auth()->user()->id)->paginate($perPage, ['*'], 'page', $page);
     }
 }

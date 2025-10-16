@@ -12,6 +12,7 @@ class Login extends BaseAction
 {
     public function __invoke(LoginRequest $request): RedirectResponse
     {
+        // dd($request->all());
         if (Auth::attempt($request->validated(), $request->boolean('remember'))) {
             $request->session()->regenerate();
 

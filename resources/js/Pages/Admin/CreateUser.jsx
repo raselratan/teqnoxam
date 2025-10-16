@@ -1,21 +1,38 @@
-import { useForm } from "@inertiajs/react"
+import { useForm, usePage } from "@inertiajs/react"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { User, Phone } from "lucide-react" // ✅ import icons
+import { User, Phone } from "lucide-react"
+import { useEffect } from "react"
+import alert from "@/components/ui/sweet-alert"
 
 export default function CreateUser() {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
-        phone: "",
-        password: "",
-        password_confirmation: "",
+        mobile: "",
     })
+
+    const { flash } = usePage().props
+
+    useEffect(() => {
+        if (flash?.success) {
+            alert({
+                icon: "success",
+                title: flash.success,
+            })
+        }
+        if (flash?.error) {
+            alert({
+                icon: "error",
+                title: flash.error,
+            })
+        }
+    }, [flash])
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        post(route("users.store"), {
+        post(route("admin.users.store"), {
             onSuccess: () => reset(),
         })
     }
@@ -39,7 +56,6 @@ export default function CreateUser() {
                                     value={data.name}
                                     onChange={(e) => setData("name", e.target.value)}
                                     className="pl-10 h-12 border border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200"
-                                    required
                                 />
                             </div>
                             {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
@@ -47,22 +63,21 @@ export default function CreateUser() {
 
                         {/* Phone */}
                         <div className="space-y-2">
-                            <Label htmlFor="phone" className="text-gray-700 font-medium">
-                                Phone
+                            <Label htmlFor="mobile" className="text-gray-700 font-medium">
+                                Mobile
                             </Label>
                             <div className="relative">
                                 <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                                 <Input
-                                    id="phone"
+                                    id="mobile"
                                     type="text"
                                     placeholder="880XXXXXXXXX"
-                                    value={data.phone}
-                                    onChange={(e) => setData("phone", e.target.value)}
+                                    value={data.mobile}
+                                    onChange={(e) => setData("mobile", e.target.value)}
                                     className="pl-10 h-12 border border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200"
-                                    required
                                 />
                             </div>
-                            {errors.phone && <p className="text-sm text-red-500">{errors.phone}</p>}
+                            {errors.mobile && <p className="text-sm text-red-500">{errors.mobile}</p>}
                         </div>
 
                         <CardFooter className="flex justify-end pt-4">

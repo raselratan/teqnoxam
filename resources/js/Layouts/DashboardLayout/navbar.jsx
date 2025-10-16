@@ -9,12 +9,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Input } from "@/components/ui/input"
+import { usePage } from '@inertiajs/react'
 import { useForm } from "@inertiajs/react"
 
 export default function Navbar({ onMenuClick, onSettingsClick, theme, onThemeToggle }) {
   const { post } = useForm();
-
+  const { props } = usePage()
   const handleLogout = (e) => {
     e.preventDefault()
     post(route('auth.signout'))
@@ -33,13 +33,6 @@ export default function Navbar({ onMenuClick, onSettingsClick, theme, onThemeTog
           </div>
         </div>
 
-        {/* <div className="hidden md:flex flex-1 max-w-md mx-8">
-          <div className="relative w-full">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input placeholder="Search..." className="pl-9 cursor-pointer" />
-          </div>
-        </div> */}
-
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="icon" onClick={onThemeToggle} className="cursor-pointer">
             {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -52,11 +45,8 @@ export default function Navbar({ onMenuClick, onSettingsClick, theme, onThemeTog
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-10 w-10 rounded-full cursor-pointer">
-                <Avatar>
-                  <AvatarImage src="/diverse-user-avatars.png" alt="User" />
-                  <AvatarFallback>JD</AvatarFallback>
-                </Avatar>
+              <Button variant="ghost" className="relative h-10 cursor-pointer">
+                {props.username}
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">

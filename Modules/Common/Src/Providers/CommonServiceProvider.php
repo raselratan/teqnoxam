@@ -25,6 +25,7 @@ class CommonServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../../Config/common.php', 'config');
         Inertia::share([
             "role" => fn() => auth()?->user()->role ?? null,
+            "username" => fn() => auth()?->user()->name ?? null,
         ]);
     }
 
