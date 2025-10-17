@@ -11,6 +11,6 @@ class Users extends BaseAction
     public function __invoke(Request $request): Response
     {
         // Get paginated users with sorting and filtering
-        return inertia('Admin/Users', $this->userServices->paginate($request->all()));
+        return inertia('Admin/User/Users', $this->userServices->paginate($request->all()));
     }
 }

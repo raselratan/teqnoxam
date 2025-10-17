@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    protected $fillable = ['question_text'];
+    protected $fillable = ['question_text', 'creator_id'];
 
     // One question has many options
     public function options()

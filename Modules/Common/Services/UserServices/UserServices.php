@@ -14,6 +14,7 @@ class UserServices extends BaseService
             return DB::transaction(function () use ($user) {
                 $user['password'] = Hash::make('12345678');
                 $user['role'] = 'admin';
+                $user['creator_id'] = auth()->user()->id;
                 return $this->userRepository->create($user);
             }, 3);
         } catch (\Throwable $e) {

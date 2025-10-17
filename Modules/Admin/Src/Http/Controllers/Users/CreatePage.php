@@ -9,6 +9,6 @@ class CreatePage extends BaseAction
 {
     public function __invoke(): Response
     {
-        return inertia('Admin/CreateUser');
+        return inertia('Admin/User/CreateUser');
     }
 }

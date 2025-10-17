@@ -44,7 +44,7 @@ export default function DashboardLayout({ children, settingsContent }) {
         {settingsContent || <DefaultSettings />}
       </SettingsSidebar>
       <main className={`pt-16 pb-12 transition-all duration-300 ${sidebarCollapsed ? "lg:ml-16" : "lg:ml-64"}`}>
-        <div className="container mx-auto p-4">{children}</div>
+        <div>{children}</div>
       </main>
       <Footer />
     </div>

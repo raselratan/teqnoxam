@@ -35,5 +35,10 @@ class CommonServiceProvider extends ServiceProvider
             \Common\Src\Repositories\Contracts\UserRepositoryInterface::class,
             \Common\Src\Repositories\UserRepository::class
         );
+
+        $this->app->bind(
+            \Common\Src\Repositories\Contracts\CategoryRepositoryInterface::class,
+            \Common\Src\Repositories\CategoryRepository::class
+        );
     }
 }

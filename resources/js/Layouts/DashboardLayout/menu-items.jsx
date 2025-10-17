@@ -1,6 +1,6 @@
 // resources/js/Data/menu-items.jsx
 
-import { Home, BarChart3, Users, Package, FileText, Settings, CornerDownRight, BookOpenCheck } from "lucide-react"
+import { Home, BarChart3, Users, Package, FileText, Settings, CornerDownRight, BookOpenCheck, ChartBarStacked } from "lucide-react"
 import { route } from "ziggy-js"
 
 export const adminMenuItems = [
@@ -22,6 +22,15 @@ export const adminMenuItems = [
         children: [
             { icon: CornerDownRight, label: "All Questions", href: "/products" },
             { icon: CornerDownRight, label: "Add Question", href: "/products/add" },
+        ],
+    },
+    {
+        icon: ChartBarStacked,
+        label: "Categories",
+        href: "/categories",
+        children: [
+            { icon: CornerDownRight, label: "All Categories", href: route('admin.categories') },
+            { icon: CornerDownRight, label: "Add Category", href: route('admin.categories.create') },
         ],
     },
     { icon: FileText, label: "Reports", href: "/reports" },
