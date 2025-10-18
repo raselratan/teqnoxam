@@ -9,6 +9,8 @@ class Categories extends BaseAction
 {
     public function __invoke(): Response
     {
-        return inertia('Admin/Category/Categories');
+        return inertia('Admin/Category/Categories', [
+            'categoris' =>  $this->categoryService->treeCategories()
+        ]);
     }
 }

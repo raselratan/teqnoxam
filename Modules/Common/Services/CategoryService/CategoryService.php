@@ -12,7 +12,10 @@ class CategoryService extends BaseService
         try {
             return DB::transaction(function () use ($data) {
                 $data['creator_id'] = auth()->user()->id;
-                return $this->categoryRepository->create($data);
+                $category = $this->categoryRepository->create($data);
+                Cache::tags(['categories'])->flush();
+                Cache::tags(['tree_categories'])->flush();
+                return $category;
             }, 3);
         } catch (\Throwable $e) {
             throw $e;
@@ -22,16 +25,24 @@ class CategoryService extends BaseService
     public function categories(array $params = [])
     {
         $cacheKey = 'categories_' . md5(serialize($params));
-        $cacheTime = 300; // 5 minutes
+        $cacheTime = 60 * 24; // 24 hours = 1440 minutes
 
-        return Cache::remember($cacheKey, $cacheTime, function () use ($params) {
-            $sortBy = $params['sort_by'] ?? 'id';
-            $sortDirection = $params['sort_direction'] ?? 'asc';
-            $search = $params['search'] ?? '';
+        return Cache::tags(['categories'])->remember($cacheKey, $cacheTime, function () use ($params) {
+            return $this->categoryRepository->categories(
+                $params['search'] ?? '',
+                $params['sort_by'] ?? 'id',
+                $params['sort_direction'] ?? 'asc'
+            );
+        });
+    }
 
-            $categories = $this->categoryRepository->categories($search, $sortBy, $sortDirection);
+    public function treeCategories(array $params = [])
+    {
+        $cacheKey = 'categories_' . md5(serialize($params));
+        $cacheTime = 60 * 24; // 24 hours = 1440 minutes
 
-            return $categories;
+        return Cache::tags(['tree_categories'])->remember($cacheKey, $cacheTime, function () use ($params) {
+            return $this->categoryRepository->treeCategories();
         });
     }
 }

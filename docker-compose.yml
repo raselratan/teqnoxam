@@ -9,6 +9,7 @@ services:
       - ./:/var/www
     depends_on:
       - exam_db
+      - exam_redis
     networks:
       - exam_laravel_net
 
@@ -53,6 +54,14 @@ services:
       - exam_app
     networks:
       - exam_laravel_net
+  exam_redis:                        # 👈 New Redis service
+    image: redis:alpine
+    container_name: exam_redis_v2
+    ports:
+      - "6379:6379"                  # Host port mapping
+    networks:
+      - exam_laravel_net
+    restart: unless-stopped
 
 volumes:
   mysqldata_v2:

@@ -27,19 +27,28 @@ class UserServices extends BaseService
         return $this->userRepository->all();
     }
 
+    /**
+     * Get paginated users with caching.
+     */
     public function paginate(array $params = [])
     {
         $cacheKey = 'users_page_' . md5(serialize($params));
-        $cacheTime = 300; // 5 minutes
+        $cacheTime = 60 * 24; // 24 hours
 
-        return Cache::remember($cacheKey, $cacheTime, function () use ($params) {
+        return Cache::tags(['users'])->remember($cacheKey, $cacheTime, function () use ($params) {
             $perPage = $params['per_page'] ?? 10;
             $page = $params['page'] ?? 1;
             $sortBy = $params['sort_by'] ?? 'id';
             $sortDirection = $params['sort_direction'] ?? 'asc';
             $search = $params['search'] ?? '';
 
-            $users = $this->userRepository->getPaginatedUsers($search, $sortBy, $sortDirection, $perPage, $page);
+            $users = $this->userRepository->getPaginatedUsers(
+                $search,
+                $sortBy,
+                $sortDirection,
+                $perPage,
+                $page
+            );
 
             return [
                 'users' => $users->items(),
@@ -55,7 +64,7 @@ class UserServices extends BaseService
                     'sort_by' => $sortBy,
                     'sort_direction' => $sortDirection,
                     'search' => $search,
-                ]
+                ],
             ];
         });
     }

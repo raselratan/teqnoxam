@@ -29,4 +29,15 @@ class CategoryRepository implements CategoryRepositoryInterface
             ->toBase() // 👈 this ensures it returns a plain query builder result (not Eloquent models)
             ->get();
     }
+
+    public function treeCategories()
+    {
+
+        return Category::with([
+            'children',
+            'creator'
+        ])
+            ->whereNull('parent_id')
+            ->get();
+    }
 }
