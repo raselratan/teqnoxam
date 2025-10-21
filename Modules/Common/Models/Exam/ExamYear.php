@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExamYear extends Model
 {
-    protected $fillable = ['title', 'year'];
+    protected $guarded = ['id'];
 
-    // Exam year has many questions
+    // Questions
     public function questions()
     {
-        return $this->belongsToMany(Question::class);
+        return $this->belongsToMany(Question::class, 'exam_year_question')
+            ->withTimestamps();
     }
 }

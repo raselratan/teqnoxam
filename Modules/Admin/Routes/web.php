@@ -21,5 +21,18 @@ Route::group(['namespace' => $namespace,  'prefix' => 'admin'], function () {
             Route::get('/create', 'CreatePage')->name('admin.categories.create');
             Route::post('/create', 'Create')->name('admin.categories.store');
         });
+
+        Route::group(['namespace' => 'Questions', 'prefix' => 'question'], function () {
+            Route::get('/create', 'CreatePage')->name('admin.question.create');
+        });
+        // Institutes
+        Route::group(['namespace' => 'Institutions', 'prefix' => 'institute'], function () {
+            Route::get('/create', 'CreatePage')->name('admin.institute.create');
+        });
+        // Posts
+        Route::group(['namespace' => 'Posts', 'prefix' => 'post'], function () {
+            Route::get('/create', 'CreatePage')->name('admin.post.create');
+            Route::post('/create', 'Create')->name('admin.post.store');
+        });
     });
 });

@@ -13,8 +13,14 @@ return new class extends Migration
     {
         Schema::create('exam_years', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 255);
+            $table->unsignedBigInteger('institute_id');
+            $table->unsignedBigInteger('post_id');
             $table->string('year', 6);
+            $table->string('comments', 255)->nullable();
+
+            $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

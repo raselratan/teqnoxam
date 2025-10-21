@@ -11,7 +11,7 @@ import { Table, Button, Popconfirm, Space } from "antd";
 import { CaretRightOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { route } from "ziggy-js";
 
-export default function Categories() {
+export default function Posts() {
   const { categoris } = usePage().props; // recursive categories
 
   // Serial counter

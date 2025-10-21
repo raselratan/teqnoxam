@@ -1,6 +1,19 @@
 // resources/js/Data/menu-items.jsx
 
-import { Home, BarChart3, Users, Package, FileText, Settings, CornerDownRight, BookOpenCheck, ChartBarStacked } from "lucide-react"
+import {
+    Home,
+    BarChart3,
+    Users,
+    Package,
+    FileText,
+    Settings,
+    CornerDownRight,
+    BookOpenCheck,
+    ChartBarStacked,
+    Landmark,
+    Milestone,
+}
+    from "lucide-react"
 import { route } from "ziggy-js"
 
 export const adminMenuItems = [
@@ -21,7 +34,7 @@ export const adminMenuItems = [
         href: "/products",
         children: [
             { icon: CornerDownRight, label: "All Questions", href: "/products" },
-            { icon: CornerDownRight, label: "Add Question", href: "/products/add" },
+            { icon: CornerDownRight, label: "Add Question", href: route('admin.question.create') },
         ],
     },
     {
@@ -31,6 +44,24 @@ export const adminMenuItems = [
         children: [
             { icon: CornerDownRight, label: "All Categories", href: route('admin.categories') },
             { icon: CornerDownRight, label: "Add Category", href: route('admin.categories.create') },
+        ],
+    },
+    {
+        icon: Landmark,
+        label: "Institutions",
+        href: "/categories",
+        children: [
+            { icon: CornerDownRight, label: "All Institutions", href: route('admin.categories') },
+            { icon: CornerDownRight, label: "Add Institution", href: route('admin.institute.create') },
+        ],
+    },
+    {
+        icon: Milestone,
+        label: "Posts",
+        href: "/categories",
+        children: [
+            { icon: CornerDownRight, label: "All Posts", href: route('admin.categories') },
+            { icon: CornerDownRight, label: "Add Post", href: route('admin.post.create') },
         ],
     },
     { icon: FileText, label: "Reports", href: "/reports" },

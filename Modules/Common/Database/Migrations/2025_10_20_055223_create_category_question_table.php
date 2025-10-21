@@ -11,18 +11,27 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exam_year_question', function (Blueprint $table) {
+        Schema::create('category_question', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('exam_year_id');
+
+            // Foreign keys
+            $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('question_id');
-            $table->foreign('exam_year_id')
+
+            // Define relationships
+            $table->foreign('category_id')
                 ->references('id')
-                ->on('exam_years')
+                ->on('categories')
                 ->onDelete('cascade');
+
             $table->foreign('question_id')
                 ->references('id')
                 ->on('questions')
                 ->onDelete('cascade');
+
+            // Optional: ensure unique combination (no duplicate pairs)
+            $table->unique(['category_id', 'question_id']);
+
             $table->timestamps();
         });
     }
@@ -32,6 +41,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('exam_year_question');
+        Schema::dropIfExists('category_question');
     }
 };
