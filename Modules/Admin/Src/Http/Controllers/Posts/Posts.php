@@ -9,8 +9,8 @@ class Posts extends BaseAction
 {
     public function __invoke(): Response
     {
-        return inertia('Admin/Category/Categories', [
-            'categoris' =>  $this->categoryService->treeCategories()
+        return inertia('Admin/Post/Posts', [
+            'posts' =>  $this->postService->posts()
         ]);
     }
 }

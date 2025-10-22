@@ -11,9 +11,8 @@ import { Table, Button, Popconfirm, Space } from "antd";
 import { CaretRightOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { route } from "ziggy-js";
 
-export default function Posts() {
-  const { posts } = usePage().props; // recursive categories
-
+export default function ExamYears() {
+  const { exam_years } = usePage().props; // recursive categories
   // Serial counter
   let serial = 0;
 
@@ -39,19 +38,34 @@ export default function Posts() {
       },
     },
     {
-      title: "নাম (বাংলা)",
-      dataIndex: "title_in_bangla",
-      key: "title_in_bangla",
+      title: "পোস্টের নাম",
+      dataIndex: "post_title",
+      key: "post_title",
     },
     {
-      title: "নাম (ইংরেজি)",
-      dataIndex: "title_in_english",
-      key: "title_in_english",
+      title: "ইনস্টিটিউটের নাম",
+      dataIndex: "institute_title",
+      key: "institute_title",
     },
     {
-      title: "সম্মিলিত নাম",
-      dataIndex: "title",
-      key: "title",
+      title: "সন",
+      dataIndex: "year",
+      key: "year",
+    },
+    {
+      title: "সম্মিলিত শিরোনাম বাংলা",
+      dataIndex: "combined_title_bangla",
+      key: "combined_title_bangla",
+    },
+    {
+      title: "সম্মিলিত শিরোনাম ইংরেজি",
+      dataIndex: "combined_title_english",
+      key: "combined_title_english",
+    },
+    {
+      title: "মন্তব্য",
+      dataIndex: "comments",
+      key: "comments",
     },
     {
       title: "Actions",
@@ -97,20 +111,14 @@ export default function Posts() {
       {/* Breadcrumb */}
       <div className="border-b-1 w-full h-12">
         <div className="w-full h-full px-4 flex justify-start items-center">
-          <Breadcrumb
-            items={[
-              { title: <a href={route("admin.dashboard")}>Dashboard</a> },
-              { title: <a href={route("admin.categories")}>Categories</a> },
-            ]}
-          />
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href={route("admin.dashboard")}>Dashboard</BreadcrumbLink>
+                <BreadcrumbLink href={route('admin.dashboard')}>Dashboard</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink href={route("admin.posts")}>Posts</BreadcrumbLink>
+                <BreadcrumbLink href={route('admin.exam_years')}>Exam Years</BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -124,7 +132,7 @@ export default function Posts() {
             scroll={{ x: "max-content" }}
             className="w-full"
             columns={columns}
-            dataSource={posts}
+            dataSource={exam_years}
             rowKey="id"
             pagination={false}
             expandable={{

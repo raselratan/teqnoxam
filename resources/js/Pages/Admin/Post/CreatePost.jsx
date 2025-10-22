@@ -39,7 +39,7 @@ export default function CreatePost() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        post(route("admin.categories.store"), {
+        post(route("admin.post.store"), {
             onSuccess: () => reset(),
         })
     }
@@ -55,11 +55,11 @@ export default function CreatePost() {
                             </BreadcrumbItem>
                             <BreadcrumbSeparator />
                             <BreadcrumbItem>
-                                <BreadcrumbLink href={route('admin.categories')}>Posts</BreadcrumbLink>
+                                <BreadcrumbLink href={route('admin.posts')}>Posts</BreadcrumbLink>
                             </BreadcrumbItem>
                             <BreadcrumbSeparator />
                             <BreadcrumbItem>
-                                <BreadcrumbLink href={route('admin.categories.create')}>Create</BreadcrumbLink>
+                                <BreadcrumbLink href={route('admin.post.create')}>Create</BreadcrumbLink>
                             </BreadcrumbItem>
                         </BreadcrumbList>
                     </Breadcrumb>

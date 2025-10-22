@@ -12,6 +12,7 @@ import {
     ChartBarStacked,
     Landmark,
     Milestone,
+    Timer,
 }
     from "lucide-react"
 import { route } from "ziggy-js"
@@ -47,11 +48,20 @@ export const adminMenuItems = [
         ],
     },
     {
+        icon: Timer,
+        label: "Exam Years",
+        href: "/examyears",
+        children: [
+            { icon: CornerDownRight, label: "All Exam Years", href: route('admin.exam_years') },
+            { icon: CornerDownRight, label: "Add Exam Year", href: route('admin.exam_years.create') },
+        ],
+    },
+    {
         icon: Landmark,
         label: "Institutions",
         href: "/categories",
         children: [
-            { icon: CornerDownRight, label: "All Institutions", href: route('admin.categories') },
+            { icon: CornerDownRight, label: "All Institutions", href: route('admin.institutes') },
             { icon: CornerDownRight, label: "Add Institution", href: route('admin.institute.create') },
         ],
     },
@@ -60,7 +70,7 @@ export const adminMenuItems = [
         label: "Posts",
         href: "/categories",
         children: [
-            { icon: CornerDownRight, label: "All Posts", href: route('admin.categories') },
+            { icon: CornerDownRight, label: "All Posts", href: route('admin.posts') },
             { icon: CornerDownRight, label: "Add Post", href: route('admin.post.create') },
         ],
     },

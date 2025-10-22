@@ -27,12 +27,22 @@ Route::group(['namespace' => $namespace,  'prefix' => 'admin'], function () {
         });
         // Institutes
         Route::group(['namespace' => 'Institutions', 'prefix' => 'institute'], function () {
+            Route::get('/', 'Institutions')->name('admin.institutes');
             Route::get('/create', 'CreatePage')->name('admin.institute.create');
+            Route::post('/create', 'Create')->name('admin.institute.store');
         });
         // Posts
         Route::group(['namespace' => 'Posts', 'prefix' => 'post'], function () {
+            Route::get('/', 'Posts')->name('admin.posts');
             Route::get('/create', 'CreatePage')->name('admin.post.create');
             Route::post('/create', 'Create')->name('admin.post.store');
+        });
+
+        // Exan Years
+        Route::group(['namespace' => 'ExamYears', 'prefix' => 'exam-years'], function () {
+            Route::get('/', 'ExamYears')->name('admin.exam_years');
+            Route::get('/create', 'CreatePage')->name('admin.exam_years.create');
+            Route::post('/create', 'Create')->name('admin.exam_years.store');
         });
     });
 });

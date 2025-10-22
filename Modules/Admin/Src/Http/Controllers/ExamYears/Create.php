@@ -1,17 +1,17 @@
 <?php
 
-namespace Admin\Src\Http\Controllers\Posts;
+namespace Admin\Src\Http\Controllers\ExamYears;
 
 use Admin\Src\Http\Controllers\BaseAction;
-use Admin\Src\Http\Requests\PostCreateRequest;
+use Admin\Src\Http\Requests\ExamYearCreateRequest;
 use Illuminate\Http\RedirectResponse;
 
 class Create extends BaseAction
 {
-    public function __invoke(PostCreateRequest $request): RedirectResponse
+    public function __invoke(ExamYearCreateRequest $request): RedirectResponse
     {
         try {
-            $this->postService->create($request->validated());
+            $this->examYearService->create($request->validated());
             return back()->with("success", "Successfully Created.");
         } catch (\Exception $e) {
             return back()

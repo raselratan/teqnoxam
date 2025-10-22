@@ -11,10 +11,8 @@ class PostService extends BaseService
     {
         try {
             return DB::transaction(function () use ($data) {
-                // $data['creator_id'] = auth()->user()->id;
                 $post = $this->postRepository->create($data);
-                // Cache::tags(['categories'])->flush();
-                // Cache::tags(['tree_categories'])->flush();
+                Cache::tags(['posts'])->flush();
                 return $post;
             }, 3);
         } catch (\Throwable $e) {
@@ -22,17 +20,17 @@ class PostService extends BaseService
         }
     }
 
-    public function categories(array $params = [])
+    public function posts(array $params = [])
     {
-        // $cacheKey = 'categories_' . md5(serialize($params));
-        // $cacheTime = 60 * 24; // 24 hours = 1440 minutes
+        $cacheKey = 'posts_' . md5(serialize($params));
+        $cacheTime = 60 * 24; // 24 hours = 1440 minutes
 
-        // return Cache::tags(['categories'])->remember($cacheKey, $cacheTime, function () use ($params) {
-        //     return $this->categoryRepository->categories(
-        //         $params['search'] ?? '',
-        //         $params['sort_by'] ?? 'id',
-        //         $params['sort_direction'] ?? 'asc'
-        //     );
-        // });
+        return Cache::tags(['posts'])->remember($cacheKey, $cacheTime, function () use ($params) {
+            return $this->postRepository->posts(
+                $params['search'] ?? '',
+                $params['sort_by'] ?? 'id',
+                $params['sort_direction'] ?? 'asc'
+            );
+        });
     }
 }

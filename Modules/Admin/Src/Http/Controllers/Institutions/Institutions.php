@@ -9,8 +9,8 @@ class Institutions extends BaseAction
 {
     public function __invoke(): Response
     {
-        return inertia('Admin/Category/Categories', [
-            'categoris' =>  $this->categoryService->treeCategories()
+        return inertia('Admin/Institution/Institutes', [
+            'institutes' =>  $this->instituteService->institutes()
         ]);
     }
 }

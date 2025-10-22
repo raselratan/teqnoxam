@@ -11,7 +11,7 @@ class Create extends BaseAction
     public function __invoke(InstituteCreateRequest $request): RedirectResponse
     {
         try {
-            $this->categoryService->create($request->validated());
+            $this->instituteService->create($request->validated());
             return back()->with("success", "Successfully Created.");
         } catch (\Exception $e) {
             return back()

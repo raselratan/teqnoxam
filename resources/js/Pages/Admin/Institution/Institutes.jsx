@@ -12,8 +12,7 @@ import { CaretRightOutlined, EditOutlined, DeleteOutlined } from "@ant-design/ic
 import { route } from "ziggy-js";
 
 export default function Institutes() {
-  const { categoris } = usePage().props; // recursive categories
-
+  const { institutes } = usePage().props; // recursive categories
   // Serial counter
   let serial = 0;
 
@@ -30,13 +29,7 @@ export default function Institutes() {
 
   const columns = [
     {
-      title: "",
-      key: "expand",
-      width: 50,
-      render: () => null, // expand button handled by expandIcon
-    },
-    {
-      title: "SL No",
+      title: "ক্রমিক নং",
       key: "sn",
       width: 80,
       render: () => {
@@ -45,16 +38,19 @@ export default function Institutes() {
       },
     },
     {
-      title: "Title",
-      dataIndex: "title",
-      key: "title",
+      title: "নাম (বাংলা)",
+      dataIndex: "title_in_bangla",
+      key: "title_in_bangla",
     },
     {
-      title: "Creator",
-      key: "name",
-      render: (value) => {
-        return value?.creator?.name;
-      },
+      title: "নাম (ইংরেজি)",
+      dataIndex: "title_in_english",
+      key: "title_in_english",
+    },
+    {
+      title: "সম্মিলিত নাম",
+      dataIndex: "title",
+      key: "title",
     },
     {
       title: "Actions",
@@ -100,12 +96,6 @@ export default function Institutes() {
       {/* Breadcrumb */}
       <div className="border-b-1 w-full h-12">
         <div className="w-full h-full px-4 flex justify-start items-center">
-          <Breadcrumb
-            items={[
-              { title: <a href={route("admin.dashboard")}>Dashboard</a> },
-              { title: <a href={route("admin.categories")}>Categories</a> },
-            ]}
-          />
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
@@ -113,7 +103,7 @@ export default function Institutes() {
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink href={route("admin.categories")}>Categories</BreadcrumbLink>
+                <BreadcrumbLink href={route("admin.institutes")}>Institutes</BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -127,7 +117,7 @@ export default function Institutes() {
             scroll={{ x: "max-content" }}
             className="w-full"
             columns={columns}
-            dataSource={categoris}
+            dataSource={institutes}
             rowKey="id"
             pagination={false}
             expandable={{

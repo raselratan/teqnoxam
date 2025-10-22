@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { FileQuestionMark, ChartBarStacked, Trash, FileText } from "lucide-react"
+import { FileQuestionMark, ChartBarStacked, Trash, FileText, MessageSquare } from "lucide-react"
 import { useEffect, useState } from "react"
 import alert from "@/components/ui/sweet-alert"
 import { Select } from 'antd';
@@ -26,7 +26,7 @@ export default function CreateQuestionPage() {
             { option_text: "", is_correct: false },
             { option_text: "", is_correct: false },
         ],
-        description: "",
+        explanation_text: "",
         category_id: [],
     })
     const [size, setSize] = useState('large');
@@ -162,24 +162,25 @@ export default function CreateQuestionPage() {
                                     {errors.options && <p className="text-sm text-red-500">{errors.options}</p>}
                                 </div>
 
-                                {/* Description */}
+                                {/* Explanation */}
                                 <div className="space-y-2">
-                                    <Label htmlFor="description" className="text-gray-700 font-medium">
-                                        Description
+                                    <Label htmlFor="explanation_text" className="text-gray-700 font-medium">
+                                        Explanation
                                     </Label>
                                     <div className="relative">
-                                        <FileText className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+                                        <MessageSquare className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
                                         <Textarea
-                                            id="description"
-                                            placeholder="Write question description or details here..."
-                                            value={data.description}
-                                            onChange={e => setData("description", e.target.value)}
-                                            className="pl-10 min-h-[100px] border border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200"
+                                            id="explanation_text"
+                                            placeholder="Write explanation"
+                                            value={data.explanation_text}
+                                            onChange={(e) => setData("explanation_text", e.target.value)}
+                                            className="pl-10 h-24 border border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200 resize-none"
                                         />
                                     </div>
-                                    {errors.description && <p className="text-sm text-red-500">{errors.description}</p>}
+                                    {errors.comment && (
+                                        <p className="text-sm text-red-500">{errors.comment}</p>
+                                    )}
                                 </div>
-
 
                                 {/* Category */}
                                 <div className="space-y-2">
@@ -197,7 +198,11 @@ export default function CreateQuestionPage() {
                                                 onChange={(value) => setData("category_id", value)}
                                                 options={options}
                                                 allowClear
+                                                showSearch     // ✅ correct prop
                                                 className="w-full"
+                                                filterOption={(input, option) =>
+                                                    option.label.toLowerCase().includes(input.toLowerCase())
+                                                }
                                             />
                                         </div>
                                     </div>

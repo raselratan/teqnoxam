@@ -39,7 +39,7 @@ export default function CreateInstitute() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        post(route("admin.categories.store"), {
+        post(route("admin.institute.store"), {
             onSuccess: () => reset(),
         })
     }
@@ -55,11 +55,11 @@ export default function CreateInstitute() {
                             </BreadcrumbItem>
                             <BreadcrumbSeparator />
                             <BreadcrumbItem>
-                                <BreadcrumbLink href={route('admin.categories')}>Institutes</BreadcrumbLink>
+                                <BreadcrumbLink href={route('admin.institutes')}>Institutes</BreadcrumbLink>
                             </BreadcrumbItem>
                             <BreadcrumbSeparator />
                             <BreadcrumbItem>
-                                <BreadcrumbLink href={route('admin.categories.create')}>Create</BreadcrumbLink>
+                                <BreadcrumbLink href={route('admin.institute.create')}>Create</BreadcrumbLink>
                             </BreadcrumbItem>
                         </BreadcrumbList>
                     </Breadcrumb>
