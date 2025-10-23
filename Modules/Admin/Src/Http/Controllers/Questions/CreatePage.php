@@ -9,9 +9,9 @@ class CreatePage extends BaseAction
 {
     public function __invoke(): Response
     {
-        $categories = $this->categoryService->categories();
         return inertia('Admin/Question/CreateQuestionPage', [
-            'categories' => $categories
+            'categories' => $this->categoryService->categories(),
+            'exam_years' => $this->examYearService->examYears(),
         ]);
     }
 }

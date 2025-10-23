@@ -55,5 +55,20 @@ class CommonServiceProvider extends ServiceProvider
             \Common\Src\Repositories\Contracts\ExamYearRepositoryInterface::class,
             \Common\Src\Repositories\ExamYearRepository::class
         );
+
+        $this->app->bind(
+            \Common\Src\Repositories\Contracts\QuestionRepositoryInterface::class,
+            \Common\Src\Repositories\QuestionRepository::class
+        );
+
+        $this->app->bind(
+            \Common\Src\Repositories\Contracts\ExplanationTextRepositoryInterface::class,
+            \Common\Src\Repositories\ExplanationTextRepository::class
+        );
+
+        $this->app->bind(
+            \Common\Src\Repositories\Contracts\QuestionOptionRepositoryInterface::class,
+            \Common\Src\Repositories\QuestionOptionRepository::class
+        );
     }
 }

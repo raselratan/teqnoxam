@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('institute_id');
             $table->unsignedBigInteger('post_id');
+            $table->unsignedInteger('exam_no')->nullable();
             $table->string('year', 6);
             $table->string('comments', 255)->nullable();
 

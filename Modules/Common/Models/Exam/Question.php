@@ -10,12 +10,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    protected $fillable = ['question_text', 'creator_id'];
+    protected $guarded = ['id'];
 
     // One question has many options
     public function options()
     {
-        return $this->hasMany(Option::class);
+        return $this->hasMany(Option::class)->inRandomOrder();
     }
 
     // One-to-one relationship for explanation

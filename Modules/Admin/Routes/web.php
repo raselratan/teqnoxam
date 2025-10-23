@@ -24,6 +24,7 @@ Route::group(['namespace' => $namespace,  'prefix' => 'admin'], function () {
 
         Route::group(['namespace' => 'Questions', 'prefix' => 'question'], function () {
             Route::get('/create', 'CreatePage')->name('admin.question.create');
+            Route::post('/create', 'Create')->name('admin.question.store');
         });
         // Institutes
         Route::group(['namespace' => 'Institutions', 'prefix' => 'institute'], function () {

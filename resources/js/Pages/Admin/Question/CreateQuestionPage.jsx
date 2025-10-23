@@ -27,13 +27,20 @@ export default function CreateQuestionPage() {
             { option_text: "", is_correct: false },
         ],
         explanation_text: "",
-        category_id: [],
+        category_ids: [],
+        exam_year_ids: [],
     })
     const [size, setSize] = useState('large');
-    const { flash, categories } = usePage().props
-    const options = categories.map(cat => ({
+    const { flash, categories, exam_years } = usePage().props
+
+    const categoriesOptions = categories.map(cat => ({
         value: cat.id,
         label: cat.title
+    }));
+
+    const examYearOptions = exam_years.map(year => ({
+        value: year.id,
+        label: year.combined_title_bangla ?? year.combined_title_english
     }));
 
     useEffect(() => {
@@ -53,10 +60,9 @@ export default function CreateQuestionPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(data)
-        // post(route("admin.categories.store"), {
-        //     onSuccess: () => reset(),
-        // })
+        post(route("admin.question.store"), {
+            onSuccess: () => reset(),
+        })
     }
     const addOption = () => {
         setData("options", [...data.options, { option_text: "", is_correct: false }]);
@@ -99,7 +105,7 @@ export default function CreateQuestionPage() {
                     <Card className="w-full max-w-full sm:max-w-2xl md:max-w-3xl lg:max-w-4xl shadow-lg h-auto">
                         <CardContent>
                             <form onSubmit={handleSubmit} className="space-y-6">
-                                {/* Name */}
+                                {/* Question */}
                                 <div className="space-y-2">
                                     <Label htmlFor="question" className="text-gray-700 font-medium">
                                         Question
@@ -115,7 +121,7 @@ export default function CreateQuestionPage() {
                                             className="pl-10 h-12 border border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200"
                                         />
                                     </div>
-                                    {errors.title && <p className="text-sm text-red-500">{errors.question}</p>}
+                                    {errors.question && <p className="text-sm text-red-500">{errors.question}</p>}
                                 </div>
 
 
@@ -177,14 +183,14 @@ export default function CreateQuestionPage() {
                                             className="pl-10 h-24 border border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200 resize-none"
                                         />
                                     </div>
-                                    {errors.comment && (
-                                        <p className="text-sm text-red-500">{errors.comment}</p>
+                                    {errors.explanation_text && (
+                                        <p className="text-sm text-red-500">{errors.explanation_text}</p>
                                     )}
                                 </div>
 
                                 {/* Category */}
                                 <div className="space-y-2">
-                                    <Label htmlFor="category_id" className="text-gray-700 font-medium">
+                                    <Label htmlFor="category_ids" className="text-gray-700 font-medium">
                                         Categories
                                     </Label>
                                     <div className="flex items-center gap-2 border border-gray-300 rounded-md px-2 py-[2px]">
@@ -194,9 +200,9 @@ export default function CreateQuestionPage() {
                                                 mode="multiple"
                                                 variant="borderless"
                                                 size={size}
-                                                value={data.category_id}
-                                                onChange={(value) => setData("category_id", value)}
-                                                options={options}
+                                                value={data.category_ids}
+                                                onChange={(value) => setData("category_ids", value)}
+                                                options={categoriesOptions}
                                                 allowClear
                                                 showSearch     // ✅ correct prop
                                                 className="w-full"
@@ -206,7 +212,34 @@ export default function CreateQuestionPage() {
                                             />
                                         </div>
                                     </div>
-                                    {errors.category_id && <p className="text-sm text-red-500">{errors.category_id}</p>}
+                                    {errors.category_ids && <p className="text-sm text-red-500">{errors.category_ids}</p>}
+                                </div>
+
+                                {/* Exam Years */}
+                                <div className="space-y-2">
+                                    <Label htmlFor="exam_year_ids" className="text-gray-700 font-medium">
+                                        Exam Years
+                                    </Label>
+                                    <div className="flex items-center gap-2 border border-gray-300 rounded-md px-2 py-[2px]">
+                                        <ChartBarStacked className="w-5 h-5 text-gray-400" />
+                                        <div className="flex-1">
+                                            <Select
+                                                mode="multiple"
+                                                variant="borderless"
+                                                size={size}
+                                                value={data.exam_year_ids}
+                                                onChange={(value) => setData("exam_year_ids", value)}
+                                                options={examYearOptions}
+                                                allowClear
+                                                showSearch     // ✅ correct prop
+                                                className="w-full"
+                                                filterOption={(input, option) =>
+                                                    option.label.toLowerCase().includes(input.toLowerCase())
+                                                }
+                                            />
+                                        </div>
+                                    </div>
+                                    {errors.exam_year_ids && <p className="text-sm text-red-500">{errors.exam_year_ids}</p>}
                                 </div>
 
                                 <CardFooter className="flex justify-end pt-4">

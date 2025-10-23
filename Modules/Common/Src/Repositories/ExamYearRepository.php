@@ -40,6 +40,21 @@ class ExamYearRepository implements ExamYearRepositoryInterface
 
                 DB::raw("
                     CONCAT(
+                        CASE 
+                            WHEN exam_years.exam_no IS NOT NULL AND exam_years.exam_no != '' THEN
+                                CONCAT(
+                                    exam_years.exam_no,
+                                    CASE 
+                                        WHEN exam_years.exam_no % 100 BETWEEN 11 AND 13 THEN 'th'
+                                        WHEN exam_years.exam_no % 10 = 1 THEN 'st'
+                                        WHEN exam_years.exam_no % 10 = 2 THEN 'nd'
+                                        WHEN exam_years.exam_no % 10 = 3 THEN 'rd'
+                                        ELSE 'th'
+                                    END,
+                                    ' '
+                                )
+                            ELSE ''
+                        END,
                         COALESCE(institutes.title_in_english, ''),
                         ' (',
                         COALESCE(posts.title_in_english, ''),
@@ -47,15 +62,22 @@ class ExamYearRepository implements ExamYearRepositoryInterface
                         exam_years.year
                     ) AS combined_title_english
                 "),
+
                 DB::raw("
                     CONCAT(
+                        CASE 
+                            WHEN exam_years.exam_no IS NOT NULL AND exam_years.exam_no != '' 
+                            THEN CONCAT(exam_years.exam_no, ' তম ')
+                            ELSE ''
+                        END,
                         COALESCE(institutes.title_in_bangla, ''),
                         ' (',
                         COALESCE(posts.title_in_bangla, ''),
                         ') - ',
                         exam_years.year
                     ) AS combined_title_bangla
-                ")
+                "),
+
             )
             ->when($search, function ($q) use ($search) {
                 $q->where(function ($q) use ($search) {
