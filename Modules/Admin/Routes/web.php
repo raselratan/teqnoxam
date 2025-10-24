@@ -45,5 +45,12 @@ Route::group(['namespace' => $namespace,  'prefix' => 'admin'], function () {
             Route::get('/create', 'CreatePage')->name('admin.exam_years.create');
             Route::post('/create', 'Create')->name('admin.exam_years.store');
         });
+
+        // Exan Years
+        Route::group(['namespace' => 'Courses', 'prefix' => 'courses'], function () {
+            Route::get('/', 'Courses')->name('admin.courses');
+            Route::get('/create', 'CreatePage')->name('admin.courses.create');
+            Route::post('/create', 'Create')->name('admin.courses.store');
+        });
     });
 });

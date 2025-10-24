@@ -1,0 +1,144 @@
+import { useForm, usePage } from "@inertiajs/react"
+import { Card, CardContent, CardFooter } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { FolderPen } from "lucide-react"
+import { useEffect, useState } from "react"
+import alert from "@/components/ui/sweet-alert"
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+import { route } from "ziggy-js"
+
+export default function CreateCoursePage() {
+    const { data, setData, post, processing, errors, reset } = useForm({
+        title: "",
+        price: 0
+    })
+    const [size, setSize] = useState('large');
+    const { flash } = usePage().props
+
+    useEffect(() => {
+        if (flash?.success) {
+            alert({
+                icon: "success",
+                title: flash.success,
+            })
+        }
+        if (flash?.error) {
+            alert({
+                icon: "error",
+                title: flash.error,
+            })
+        }
+    }, [flash])
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        post(route("admin.courses.store"), {
+            onSuccess: () => reset(),
+        })
+    }
+
+    return (
+        <div>
+            <div className="border-b-1 w-full h-12">
+                <div className="w-full h-full px-4 flex justify-start items-center">
+                    <Breadcrumb>
+                        <BreadcrumbList>
+                            <BreadcrumbItem>
+                                <BreadcrumbLink href={route('admin.dashboard')}>Dashboard</BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <BreadcrumbLink href={route('admin.courses')}>Courses</BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <BreadcrumbLink href={route('admin.courses.create')}>Create</BreadcrumbLink>
+                            </BreadcrumbItem>
+                        </BreadcrumbList>
+                    </Breadcrumb>
+                </div>
+            </div>
+            <div className="container mx-auto p-4">
+                <div className="w-full h-full flex justify-center items-center p-4">
+                    <Card className="w-full max-w-full sm:max-w-2xl md:max-w-3xl lg:max-w-4xl shadow-lg h-auto">
+                        <CardContent>
+                            <form onSubmit={handleSubmit} className="space-y-6">
+                                {/* Name */}
+                                <div className="space-y-2">
+                                    <Label htmlFor="title" className="text-gray-700 font-medium">
+                                        Course Title
+                                    </Label>
+                                    <div className="relative">
+                                        <FolderPen className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                        <Input
+                                            id="title"
+                                            type="text"
+                                            placeholder="50th BCS Model Test"
+                                            value={data.title}
+                                            onChange={(e) => setData("title", e.target.value)}
+                                            className="pl-10 h-12 border border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200"
+                                        />
+                                    </div>
+                                    {errors.title && <p className="text-sm text-red-500">{errors.title}</p>}
+                                </div>
+
+                                {/* Price */}
+                                <div className="space-y-2">
+                                    <Label htmlFor="price" className="text-gray-700 font-medium">
+                                        Course Price
+                                    </Label>
+                                    <div className="relative">
+                                        <span className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" >BDT</span>
+                                        <Input
+                                            id="price"
+                                            type="number"
+                                            min="0"
+                                            placeholder="1000"
+                                            value={data.price}
+                                            onChange={(e) => {
+                                                setData("price", Math.max(0, e.target.value).toString());
+                                            }}
+                                            onKeyDown={(e) => {
+                                                // Block minus key
+                                                if (e.key === '-' || e.key === 'Subtract') {
+                                                    e.preventDefault();
+                                                }
+                                            }}
+                                            onPaste={(e) => {
+                                                // Handle paste events
+                                                const pastedData = e.clipboardData.getData('text');
+                                                if (pastedData.includes('-')) {
+                                                    e.preventDefault();
+                                                }
+                                            }}
+                                            onWheel={(e) => {
+                                                // Prevent value change on scroll
+                                                e.target.blur();
+                                            }}
+                                            className="pl-10 h-12 text-right border border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200"
+                                        />
+                                    </div>
+                                    {errors.title && <p className="text-sm text-red-500">{errors.title}</p>}
+                                </div>
+
+                                <CardFooter className="flex justify-end pt-4">
+                                    <Button type="submit" disabled={processing} className="w-full cursor-pointer">
+                                        {processing ? "Creating..." : "Create Course"}
+                                    </Button>
+                                </CardFooter>
+                            </form>
+                        </CardContent>
+                    </Card>
+                </div>
+            </div>
+        </div>
+    )
+}

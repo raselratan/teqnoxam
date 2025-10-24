@@ -15,6 +15,7 @@ class UserServices extends BaseService
                 $user['password'] = Hash::make('12345678');
                 $user['role'] = 'admin';
                 $user['creator_id'] = auth()->user()->id;
+                Cache::tags(['users'])->flush();
                 return $this->userRepository->create($user);
             }, 3);
         } catch (\Throwable $e) {

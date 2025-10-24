@@ -4,6 +4,7 @@ namespace Admin\Src\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Common\Services\CategoryService\CategoryService;
+use Common\Services\CourseService\CourseService;
 use Common\Services\ExamYearService\ExamYearService;
 use Common\Services\InstituteService\InstituteService;
 use Common\Services\PostService\PostService;
@@ -18,6 +19,7 @@ abstract class BaseAction extends Controller
         protected InstituteService $instituteService,
         protected PostService $postService,
         protected ExamYearService $examYearService,
-        protected QuestionServices $questionServices
+        protected QuestionServices $questionServices,
+        protected CourseService $courseService
     ) {}
 }

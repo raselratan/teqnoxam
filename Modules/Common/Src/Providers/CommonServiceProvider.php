@@ -70,5 +70,10 @@ class CommonServiceProvider extends ServiceProvider
             \Common\Src\Repositories\Contracts\QuestionOptionRepositoryInterface::class,
             \Common\Src\Repositories\QuestionOptionRepository::class
         );
+
+        $this->app->bind(
+            \Common\Src\Repositories\Contracts\CourseRepositoryInterface::class,
+            \Common\Src\Repositories\CourseRepository::class
+        );
     }
 }

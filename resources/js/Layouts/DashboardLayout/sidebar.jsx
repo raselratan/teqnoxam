@@ -10,12 +10,20 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { cn } from "@/lib/utils"
 import { Link } from "@inertiajs/react"
 import { usePage } from '@inertiajs/react'
-import { adminMenuItems, userMenuItems } from "./menu-items"
+import { adminMenuItems } from "./admin-menu-items"
+import { examineeMenuItems } from "./examinee-menu-items"
 
 export default function Sidebar({ isOpen, isCollapsed, onCollapse }) {
   const [expandedItems, setExpandedItems] = useState([])
   const { props } = usePage()
-  const menuItems = props.role == 'admin' ? adminMenuItems : userMenuItems;
+
+  const menuMap = {
+    admin: adminMenuItems,
+    examinee: examineeMenuItems,
+  };
+
+  const menuItems = menuMap[props.role] || adminMenuItems;
+
   const toggleExpand = (label) => {
     setExpandedItems((prev) => (prev.includes(label) ? prev.filter((item) => item !== label) : [...prev, label]))
   }

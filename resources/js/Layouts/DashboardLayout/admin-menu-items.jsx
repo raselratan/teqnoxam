@@ -13,6 +13,7 @@ import {
     Landmark,
     Milestone,
     Timer,
+    NotebookPen,
 }
     from "lucide-react"
 import { route } from "ziggy-js"
@@ -21,12 +22,12 @@ export const adminMenuItems = [
     { icon: Home, label: "Dashboard", href: route('admin.dashboard') },
     { icon: BarChart3, label: "Analytics", href: "/analytics" },
     {
-        icon: Users,
-        label: "Users",
-        href: "/users",
+        icon: NotebookPen,
+        label: "Courses",
+        href: "/courses",
         children: [
-            { icon: CornerDownRight, label: "All Users", href: route('admin.users') },
-            { icon: CornerDownRight, label: "Add User", href: route('admin.users.create') },
+            { icon: CornerDownRight, label: "All Courses", href: route('admin.courses') },
+            { icon: CornerDownRight, label: "Add Course", href: route('admin.courses.create') },
         ],
     },
     {
@@ -74,33 +75,15 @@ export const adminMenuItems = [
             { icon: CornerDownRight, label: "Add Post", href: route('admin.post.create') },
         ],
     },
-    { icon: FileText, label: "Reports", href: "/reports" },
-    { icon: Settings, label: "Settings", href: "/settings" },
-];
-
-export const userMenuItems = [
-    { icon: Home, label: "Dashboard", href: route('admin.dashboard') },
-    { icon: BarChart3, label: "Analytics", href: "/analytics" },
     {
         icon: Users,
         label: "Users",
         href: "/users",
         children: [
             { icon: CornerDownRight, label: "All Users", href: route('admin.users') },
-            { icon: CornerDownRight, label: "Add User", href: route('admin.users') },
-            { icon: CornerDownRight, label: "User Roles", href: route('admin.users') },
-        ],
-    },
-    {
-        icon: Package,
-        label: "Products",
-        href: "/products",
-        children: [
-            { icon: CornerDownRight, label: "All Products", href: "/products" },
-            { icon: CornerDownRight, label: "Add Product", href: "/products/add" },
-            { icon: CornerDownRight, label: "Categories", href: "/products/categories" },
+            { icon: CornerDownRight, label: "Add User", href: route('admin.users.create') },
         ],
     },
     { icon: FileText, label: "Reports", href: "/reports" },
     { icon: Settings, label: "Settings", href: "/settings" },
-]
+];
