@@ -44,7 +44,7 @@ export default function Users() {
     {
       header: "Mobile",
       accessorKey: "mobile",
-      cell: (info) => info.getValue(),
+      cell: (info) => <a href={`tel:${info.getValue()}`}>{info.getValue()}</a>,
     },
     {
       header: "Role",
