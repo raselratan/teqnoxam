@@ -44,4 +44,32 @@ class QuestionServices extends BaseService
             throw $e;
         }
     }
+
+    public function paginatedQuestions(array $params = [])
+    {
+        $perPage = $params['per_page'] ?? 10;
+        $page = $params['page'] ?? 1;
+        $sortBy = $params['sort_by'] ?? 'id';
+        $sortDirection = $params['sort_direction'] ?? 'asc';
+        $search = $params['search'] ?? '';
+
+        $questions = $this->questionRepository->questions($search, $sortBy, $sortDirection, $perPage, $page);
+        // dd($questions->items());
+        return [
+            'questions' => $questions->items(),
+            'pagination' => [
+                'current_page' => $questions->currentPage(),
+                'last_page' => $questions->lastPage(),
+                'per_page' => $questions->perPage(),
+                'total' => $questions->total(),
+                'from' => $questions->firstItem(),
+                'to' => $questions->lastItem(),
+            ],
+            'filters' => [
+                'sort_by' => $sortBy, // Return original frontend column name
+                'sort_direction' => $sortDirection,
+                'search' => $search,
+            ],
+        ];
+    }
 }

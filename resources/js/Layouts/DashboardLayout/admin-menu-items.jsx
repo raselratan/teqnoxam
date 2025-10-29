@@ -35,7 +35,7 @@ export const adminMenuItems = [
         label: "Questions",
         href: "/products",
         children: [
-            { icon: CornerDownRight, label: "All Questions", href: "/products" },
+            { icon: CornerDownRight, label: "All Questions", href: route('admin.question') },
             { icon: CornerDownRight, label: "Add Question", href: route('admin.question.create') },
         ],
     },

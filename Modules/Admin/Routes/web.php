@@ -22,7 +22,9 @@ Route::group(['namespace' => $namespace,  'prefix' => 'admin'], function () {
             Route::post('/create', 'Create')->name('admin.categories.store');
         });
 
+        // Question
         Route::group(['namespace' => 'Questions', 'prefix' => 'question'], function () {
+            Route::get('/', 'Questions')->name('admin.question');
             Route::get('/create', 'CreatePage')->name('admin.question.create');
             Route::post('/create', 'Create')->name('admin.question.store');
         });
